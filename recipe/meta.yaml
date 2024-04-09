@@ -1,0 +1,112 @@
+package:
+  name: vapoursynth
+  version: R65
+
+source:
+  git_url: https://github.com/vapoursynth/vapoursynth
+  git_rev: 3157049549a0940359b37004aeeeebd8f1db665e
+
+build:
+  number: 0
+  script: 
+    - "%RECIPE_DIR%\\prebuild.bat" # [win]
+    - "../autogen.sh" # [linux]
+  string: py{{ py }}_win # [win]
+
+requirements:
+  build: 
+    - git  # for source/git_url above
+    - vs2022_win-64
+  host:
+    - python=3.11 
+    - sphinx=3.2.1
+    - sphinx-intl=2.1.0
+    - sphinx-rtd-theme=1.3.0
+    - cython>3
+    - pip
+    - setuptools
+    - wheel
+    - pytest
+    - ninja
+    - jinja2<3.1
+    - idna=3.6
+    - freetype=2.12.1
+    - fonttools=4.47.2
+    - markdown-it-py=3.0.0
+    - rich=13.7.0
+    - tk
+    - ucrt
+    - kiwisolver
+    - imagesize
+    - icu
+    - jpeg
+    - libpng
+    - libtiff
+    - libwebp
+    - libwebp-base
+    - libffi
+    - mdurl=0.1.0
+    - pyqt=5.15.10
+    - pyqt5-sip=12.13.0
+    - xz
+    - zlib
+    - zstd
+    - typing_extensions
+    - six
+    - pywin32>=306
+    - QDarkStyle>=3.1
+
+  run:
+    - python=3.11
+    - pillow>=7.1,<10
+    - six
+    - matplotlib
+    - pyqt=5.15.10
+    - pyqt5-sip=12.13.0
+    - pygments=2.17.2
+    - pyparsing=3.1.1
+    - idna=3.6
+    - colorama=0.4.6
+    - contourpy=1.2.0
+    - cycler=0.11.0
+    - cython>3
+    - tqdm>4.29.0
+    - typing_extensions
+    - sphinx=3.2.1
+    - sphinx-intl=2.1.0
+    - sphinx-rtd-theme=1.3.0
+    - pip
+    - setuptools
+    - wheel
+    - mkl
+    - mdurl=0.1.0
+    - pywin32>=306
+    - QDarkStyle>=3.1
+channel_priority:
+  - conda-forge
+
+test:
+  imports:
+    - vapoursynth
+  commands:
+    - "python %SRC_DIR%\\run_tests.py"
+  files:
+    - run_tests.py
+  source_files:
+    - test
+
+about:
+  description: A video processing framework with simplicity in mind.
+  dev_url: https://github.com/vapoursynth/vapoursynth
+  doc_url: https://www.vapoursynth.com/doc/
+  home: https://www.vapoursynth.com/
+  license: GNU Lesser General Public License v2.1
+  license_family: LGPL
+  license_file: COPYING.LESSER
+  summary: A video processing framework with simplicity in mind.
+
+extra:
+  copy_test_source_files: true
+  final: true
+  recipe-maintainers:
+    - sdy623
